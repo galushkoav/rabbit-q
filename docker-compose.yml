@@ -22,9 +22,6 @@ services:
     privileged: true
     restart: always
     #entrypoint: "/bin/bash /run.sh"
-    extra_hosts:
-     #- "commod.etagi.com:10.1.9.5"
-     - "telegram.etagi.com:10.1.9.102"
     environment:
        - "TZ=Asia/Yekaterinburg" 
 
