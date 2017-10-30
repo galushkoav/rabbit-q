@@ -1,0 +1,43 @@
+version: '2.0'
+
+services:
+
+
+
+  rabbitmq.docker:
+    build: rabbitmq/
+    container_name: rabbitmq.docker
+    hostname: rabbitmq.docker
+    restart: always
+    volumes:
+      - ./rabbitlogs:/data/log
+      - ./rabbitdata:/data/mnesia
+    ports:
+      - "4369:4369" 
+      - "5672:5672"  
+      - "15672:15672"
+    networks:
+      - rabbitmq-network
+    tty: true
+    privileged: true
+    restart: always
+    #entrypoint: "/bin/bash /run.sh"
+    extra_hosts:
+     #- "commod.etagi.com:10.1.9.5"
+     - "telegram.etagi.com:10.1.9.102"
+    environment:
+       - "TZ=Asia/Yekaterinburg" 
+
+ #####Включить логирование в syslog     
+    #links:
+    #  - "db_proxy:percona"
+    #logging:
+     # driver: syslog
+     # options:
+     #   syslog-address: "tcp://127.0.0.1:23223"
+
+###Сети докера - создаются автоматом
+networks:
+  rabbitmq-network:
+     driver: bridge
+
